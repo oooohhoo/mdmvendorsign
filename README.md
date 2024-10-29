@@ -9,9 +9,9 @@
 ### Guide
 1. Request a vendor certificate using your apple developer account.
 2. Create CSR using Keychain Access, and upload it to apple developer website to create a MDM CSR signing certificate.
-3. Export the key(key.p12) from Keychain Access and download the MDM CSR signing certificate(mdm_signing.cer).
-4. Convert key(.p12) to plain private key(.key) <br/>```openssl pkcs12 -in key.p12 -nocerts -out key.pem && openssl rsa -in key.pem -out private.key```
-5. Run script with python3<br/>```python3 mdm_vendor_sign.py  --csr mdm.csr --key private.key --mdm mdm_signing.cer --out mdm_signed.csr```
+3. Export the key `key.p12` from Keychain Access and download the MDM CSR signing certificate `mdm_signing.cer`.
+4. Convert key `key.p12` to plain private key `private.key` <br/>```openssl pkcs12 -in key.p12 -nocerts -out key.pem && openssl rsa -in key.pem -out private.key```
+5. Run script `mdm_vendor_sign.py` with python3<br/>```python3 mdm_vendor_sign.py  --csr mdm.csr --key private.key --mdm mdm_signing.cer --out mdm_signed.csr```
 6. Upload `mdm_signed.csr` to [identity.apple.com/pushcert](https://identity.apple.com/pushcert)
   
 ## OLD
