@@ -1,5 +1,21 @@
 # mdmvendorsign
 
+## UPDATE (2024)
+### Fix
+* Convert to python3 script.
+* Using latest WWDR intermediate certificate.
+  
+
+### Guide
+1. Request a vendor certificate.
+2. Create CSR using Keychain Access, and upload it apple developer website to create MDM CSR signing certificate.
+3. Export the key(.p2) from Keychain Access and download the MDM CSR signing certificate.
+4. Convert key(.p12) to plain private key(.key) <br/>```openssl pkcs12 -in key.p12 -nocerts -out key.pem && openssl rsa -in key.pem -out private.key```
+5. Run script with python3<br/>```python3 mdm_vendor_sign.py  --csr mdm.csr --key private.key --mdm mdm_signing.cer --out mdm_signed.csr```
+6. Upload `mdm_signed.csr` to [identity.apple.com/pushcert](https://identity.apple.com/pushcert)
+  
+## OLD
+
 Create a certificate signing request as a "vendor" of Apple's MDM push notification service
 
 This script produces the special encoded plist that is uplaoded to the [Apple Push Certificate Portal] (https://identity.apple.com/pushcert/) for creating certificates to work with Apple's [Mobile Device Management](http://www.apple.com/iphone/business/it-center/deployment-mdm.html) (MDM) system.
